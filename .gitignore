@@ -1,0 +1,5 @@
+scripts/monitor.log
+scripts/.gateway_updated_at
+vendor/
+.env
+*.bak*

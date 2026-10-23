@@ -1,0 +1,26 @@
+{
+    "name": "chooka321/deluxe-payment-platform",
+    "description": "Deluxe Payment Platform embedded payment driver for Invoice Ninja",
+    "type": "library",
+    "authors": [
+        {
+            "name": "chooka321",
+            "email": "347108626+chooka321@users.noreply.github.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Chooka321\\Deluxe\\": "src/Plugin/"
+        },
+        "classmap": [
+            "src/PaymentDrivers/"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Chooka321\\Deluxe\\DeluxeServiceProvider"
+            ]
+        }
+    }
+}

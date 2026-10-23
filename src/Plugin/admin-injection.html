@@ -1,0 +1,60 @@
+<style id="deluxe-checkbox-restyle">
+  /*
+   * Cosmetic restyle of the Headless UI Switch as a square checkbox.
+   * Scoped to the "Production Mode" toggle via a JS-applied class so no
+   * other switch in the admin UI is affected.
+   */
+  button[role="switch"].deluxe-production-checkbox {
+    height: 1.125rem !important;
+    width:  1.125rem !important;
+    border-radius: 0.25rem !important;
+    background-color: #ffffff !important;
+    border: 1px solid #6b7280 !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 120ms ease, border-color 120ms ease !important;
+  }
+  button[role="switch"].deluxe-production-checkbox[aria-checked="true"] {
+    background-color: #2563eb !important;
+    border-color: #2563eb !important;
+  }
+  button[role="switch"].deluxe-production-checkbox > span {
+    display: none !important;
+  }
+  button[role="switch"].deluxe-production-checkbox[aria-checked="true"]::before {
+    content: '\2713';
+    color: #ffffff;
+    font-size: 0.85rem;
+    line-height: 1;
+    font-weight: 700;
+  }
+</style>
+<script id="deluxe-checkbox-script">
+  (function () {
+    var LABEL = 'Production Mode';
+    var CLASS = 'deluxe-production-checkbox';
+
+    function tag() {
+      var spans = document.querySelectorAll('dt > span.font-medium');
+      for (var i = 0; i < spans.length; i++) {
+        if ((spans[i].textContent || '').trim() !== LABEL) continue;
+        var dt = spans[i].closest('dt');
+        if (!dt) continue;
+        var dd = dt.nextElementSibling;
+        while (dd && dd.tagName !== 'DD') dd = dd.nextElementSibling;
+        if (!dd) continue;
+        var btn = dd.querySelector('button[role="switch"]');
+        if (btn && !btn.classList.contains(CLASS)) btn.classList.add(CLASS);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tag);
+    } else {
+      tag();
+    }
+    new MutationObserver(tag).observe(document.documentElement, { childList: true, subtree: true });
+  })();
+</script>
